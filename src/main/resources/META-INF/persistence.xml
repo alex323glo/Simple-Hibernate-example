@@ -1,0 +1,48 @@
+<persistence
+        xmlns="http://java.sun.com/xml/ns/persistence"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/persistence "
+        version="2.0">
+
+    <!-- transaction-type="RESOURCE_LOCAL" means that we will rule the transactions be our own -->
+    <!-- transaction-type="JTA" means that we will use Java Transaction API (JTA) to rule the transactions -->
+    <persistence-unit name="test-hibernate-h2-unit" transaction-type="RESOURCE_LOCAL">
+
+        <description>
+            Persistence unit for the JPA tutorial
+        </description>
+
+        <provider>
+            org.hibernate.jpa.HibernatePersistenceProvider
+        </provider>
+
+
+        <!-- Classes, which will be mapped: -->
+        <class>com.alex323glo.hibernate.model.User</class>
+        <class>com.alex323glo.hibernate.model.City</class>
+        <class>com.alex323glo.hibernate.model.Game</class>
+
+        <!-- Properties of DB: -->
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:./databases/test_data_source"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+
+            <!-- Init DDL operations. Possible variants:
+                - create: create relation model of OOP model,
+                - update: relation model will be updated with OOP model,
+                - create-drop: create relation model of OOP model AND drop it on exit.
+            -->
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+
+    </persistence-unit>
+
+
+    <!-- In one persistence.xml could be set A LOT OF different persistence-units ! -->
+
+</persistence>
